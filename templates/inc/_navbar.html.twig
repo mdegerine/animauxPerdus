@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid">
+        <h1 class="header-logo">
+            <img src="{{ asset('img/LogoAnimauxPerdus2.PNG') }}" alt="Logo">
+            </a>
+        </h1>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="navbar-brand" href=" {{ path('main_home') }}">Accueil</a>
+                <a class="nav-link active" aria-current="page" href="{{ path('main_actualites')}}">Actualités</a>
+                <a class="nav-link active" aria-current="page" href="{{ path('annonce_ajouter')}}">Créer une annonce</a>
+                <a class="nav-link active" aria-current="page" href=" {{ path('annonce_list') }}">Annonces</a>
+                <a class="nav-link active" aria-current="page" href="#">Messages</a>
+                <a class="nav-link active" aria-current="page" href="#">Profil</a>
+            </div>
+        </div>
+    </div>
+</nav>
