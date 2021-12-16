@@ -45,6 +45,16 @@ class Animal
      */
     private $identification;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Poils::class, inversedBy="animals")
+     */
+    private $poils;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeAnimal::class, inversedBy="animals")
+     */
+    private $typeAnimal;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -129,6 +139,30 @@ class Animal
     public function setIdentification(?Identification $identification): self
     {
         $this->identification = $identification;
+
+        return $this;
+    }
+
+    public function getPoils(): ?Poils
+    {
+        return $this->poils;
+    }
+
+    public function setPoils(?Poils $poils): self
+    {
+        $this->poils = $poils;
+
+        return $this;
+    }
+
+    public function getTypeAnimal(): ?TypeAnimal
+    {
+        return $this->typeAnimal;
+    }
+
+    public function setTypeAnimal(?TypeAnimal $typeAnimal): self
+    {
+        $this->typeAnimal = $typeAnimal;
 
         return $this;
     }

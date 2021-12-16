@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Annonce;
+use App\Form\AnnonceType;
 use App\Repository\AnimalRepository;
 use App\Repository\AnnonceRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -49,20 +50,11 @@ class AnnonceController extends AbstractController
      * @Route("/ajouter", name="annonce_ajouter")
      */
     public function ajouter(EntityManagerInterface $em): Response {
-        //TODO / TRAITER UN FORMULAIRE
-
         $annonce = new Annonce();
-        $annonce->setStatut("aperçu");
-        $annonce->setDate(new \DateTime());
-        $annonce->setDepartement("vaucluse");
-        $annonce->setVille("mazan");
-        $annonce->setRue("chemin le piol");
+        $formAnnonce = $this->createForm(AnnonceType::class, $annonce);
 
-        $em->persist($annonce);
-        dump($annonce);
-        $em->flush();
-        dump($annonce);
-
-        return $this->render("annonce/ajouter.html.twig");
+        return $this->render("annonce/ajouter.html.twig", [
+            'formAnnonce'=>$formAnnonce->createView()
+        ]);
     }
 }
