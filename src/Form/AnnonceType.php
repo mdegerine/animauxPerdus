@@ -2,23 +2,39 @@
 
 namespace App\Form;
 
+
+
+use App\Entity\Animal;
 use App\Entity\Annonce;
+use App\Entity\Departement;
+use App\Entity\Statut;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Date;
+
 
 class AnnonceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date', Date::class,[
-                'date_widget'=>'single_text',
-                'html5'=>true,
+
+            ->add('statut', EntityType::class,[
+                'class'=>statut::class,
+                'choice_label'=>'libelle'
             ])
+
+
+
+            ->add('departement', EntityType::class, [
+                'class'=>departement::class,
+                'choice_label'=>'libelle'
+            ])
+
             ->add('ville',  TextType::class, [
                 'label'=>'Ville'
             ])
@@ -32,14 +48,9 @@ class AnnonceType extends AbstractType
                     'required'=>false
                 ]
             ])
-            ->add('photo', TextType::class, [
-                'attr'=> 'photoAnimal',
-                'required'=>false
-            ])
-            ->add('statut', TextType::class)
-            ->add('departement', TextType::class)
-            ->add('animal')
-            ->add('user')
+
+
+
         ;
     }
 

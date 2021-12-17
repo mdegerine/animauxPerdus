@@ -41,9 +41,7 @@ header h1 {
     margin-right: 5px;
 }
 
-.navbar-nav{
-    margin-right: 350px;
-}
+
 header a {
     font-size: 20px;
     text-decoration: none;
@@ -53,11 +51,6 @@ header nav a:hover {
     font-family: "Arial Black";
 }
 
-footer {
-    padding: 2rem 0;
-    text-align: center;
-    background-color: #028090;
-}
 .header-nav {
     display: flex
 }
@@ -68,4 +61,11 @@ header h1 {
 
 .header-nav a {
     margin-right: 3rem;
+}
+
+
+footer {
+    padding: 2rem 0;
+    text-align: center;
+    background-color: #028090;
 }

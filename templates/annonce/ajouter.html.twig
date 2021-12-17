@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme formAnnonce "bootstrap_5_horizontal_layout.html.twig" %}
+
 {% block title %}
 Créer une annonce - {{ parent() }}
 {% endblock %}
@@ -8,7 +10,13 @@ Créer une annonce - {{ parent() }}
 
     <h1>Créer une annonce</h1>
     {{ form(formAnnonce) }}
+
+
+
 {% endblock %}
+
+
+
 
 
 

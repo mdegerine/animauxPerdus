@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Animal;
 use App\Entity\Annonce;
+use App\Form\AnimalType;
 use App\Form\AnnonceType;
 use App\Repository\AnimalRepository;
 use App\Repository\AnnonceRepository;
@@ -51,6 +53,7 @@ class AnnonceController extends AbstractController
      */
     public function ajouter(EntityManagerInterface $em): Response {
         $annonce = new Annonce();
+
         $formAnnonce = $this->createForm(AnnonceType::class, $annonce);
 
         return $this->render("annonce/ajouter.html.twig", [
