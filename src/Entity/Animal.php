@@ -55,6 +55,11 @@ class Animal
      */
     private $typeAnimal;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Annonce::class, mappedBy="aminal", cascade={"persist", "remove"})
+     */
+    private $annonce;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -163,6 +168,28 @@ class Animal
     public function setTypeAnimal(?TypeAnimal $typeAnimal): self
     {
         $this->typeAnimal = $typeAnimal;
+
+        return $this;
+    }
+
+    public function getAnnonce(): ?Annonce
+    {
+        return $this->annonce;
+    }
+
+    public function setAnnonce(?Annonce $annonce): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($annonce === null && $this->annonce !== null) {
+            $this->annonce->setAminal(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($annonce !== null && $annonce->getAminal() !== $this) {
+            $annonce->setAminal($this);
+        }
+
+        $this->annonce = $annonce;
 
         return $this;
     }

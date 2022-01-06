@@ -22,16 +22,7 @@ class Annonce
      * @ORM\Column(type="datetime")
      */
     private $date;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $ville;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $rue;
+    
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -66,6 +57,22 @@ class Annonce
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Animal::class, inversedBy="annonce", cascade={"persist", "remove"})
+     */
+    private $aminal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ville;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Rue::class, inversedBy="annonces")
+     */
+    private $rue;
     
 
     public function getId(): ?int
@@ -191,6 +198,18 @@ class Annonce
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAminal(): ?Animal
+    {
+        return $this->aminal;
+    }
+
+    public function setAminal(?Animal $aminal): self
+    {
+        $this->aminal = $aminal;
 
         return $this;
     }
