@@ -6,12 +6,13 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "1.11.99.4",
         "doctrine/annotations": "^1.13",
         "doctrine/doctrine-bundle": "^2.5",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.10",
         "sensio/framework-extra-bundle": "^6.2",
@@ -37,7 +38,12 @@
             "*": "dist"
         },
         "sort-packages": true,
-		"secure-http": false
+		"secure-http": false,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
     },
     "autoload": {
         "psr-4": {
@@ -75,15 +81,7 @@
             "require": "5.4.*"
         }
     },
-	"repositories" : [
-	{
-			"type": "composer",
-			"url": "http://nexus.depot-eni.fr:8081/repository/composer-proxy-packagist.org/"
-		},
-		{
-		"packagist.org": false
-		}
-	],
+
     "require-dev": {
         "symfony/debug-bundle": "5.4.*",
         "symfony/maker-bundle": "^1.36",

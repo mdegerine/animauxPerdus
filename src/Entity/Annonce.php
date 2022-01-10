@@ -42,7 +42,6 @@ class Annonce
 
     /**
      * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="annonces")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $departement;
 
