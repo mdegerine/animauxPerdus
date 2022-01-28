@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formCommentaire "bootstrap_5_horizontal_layout.html.twig" %}
+{% block title %}
+Modifier un commentaire
+{% endblock %}
+
+{% block body %}
+    <h1>Modifier un commentaire</h1>
+    {{ form_start(formCommentaire) }}
+    {{ form_widget(formCommentaire) }}
+    <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
+    {{ form_end(formCommentaire) }}
+{% endblock %}
+
+

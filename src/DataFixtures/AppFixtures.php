@@ -1,6 +1,7 @@
 <?php
 namespace App\DataFixtures;
 
+use App\Entity\Couleur;
 use App\Entity\Departement;
 use App\Entity\Identification;
 use App\Entity\Poils;
@@ -11,7 +12,6 @@ use App\Entity\TypeAnimal;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -26,34 +26,25 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         //-------------------------------------------
-        //Création des User
+        //USER
         //-------------------------------------------
 
-
-        $user2 = new User();
-        $user2->setEmail("dsanchez@eni-ecole.fr");
-        $user2->setPseudo("denis");
-        $user2->setNom("Sanchez");
-        $user2->setPrenom("Denis");
-        $user2->setTelephone("853478254");
-        $user2->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
+        $user1 = new User();
+        $user1->setEmail("admin@test.fr");
+        $user1->setPseudo("admin");
+        $user1->setNom("degerine");
+        $user1->setPrenom("monique");
+        $user1->setTelephone("0853478254");
+        $user1->setRoles(["ROLE_ADMIN"]);
         $plainPassword = "123456";
-        $encoded = $this->encoder->encodePassword($user2, $plainPassword);
-        $user2->setPassword($encoded);
-        $manager->persist($user2);
+        $encoded = $this->encoder->encodePassword($user1, $plainPassword);
+        $user1->setPassword($encoded);
+        $manager->persist($user1);
 
-        $user3 = new User();
-        $user3->setEmail("mo@mo.fr");
-        $user3->setPseudo("mo");
-        $user3->setNom("mo");
-        $user3->setPrenom("mo");
-        $user3->setTelephone("853478254");
-        $user3->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
-        $plainPassword = "123456";
-        $encoded = $this->encoder->encodePassword($user3, $plainPassword);
-        $user3->setPassword($encoded);
-        $manager->persist($user3);
 
+        //-------------------------------------------
+        //IDENTIFICATION
+        //-------------------------------------------
 
         $identification1 = new identification();
         $identification1->setLibelle('Tatouage');
@@ -66,6 +57,14 @@ class AppFixtures extends Fixture
         $identification3 = new identification();
         $identification3->setLibelle('Je ne sais pas');
         $manager->persist($identification3);
+
+        $identification4 = new identification();
+        $identification4->setLibelle('Aucune');
+        $manager->persist($identification4);
+
+        //-------------------------------------------
+        //POILS
+        //-------------------------------------------
 
         $poils1 = new poils();
         $poils1->setLibelle('Courts');
@@ -87,6 +86,44 @@ class AppFixtures extends Fixture
         $poils5->setLibelle('Frisés');
         $manager->persist($poils5);
 
+        $poils6 = new poils();
+        $poils6->setLibelle('Aucun');
+        $manager->persist($poils6);
+
+
+        //-------------------------------------------
+        //COULEUR
+        //-------------------------------------------
+
+        $couleur1 = new couleur();
+        $couleur1->setLibelle('Blanc');
+        $manager->persist($couleur1);
+
+        $couleur2 = new couleur();
+        $couleur2->setLibelle('Noir');
+        $manager->persist($couleur2);
+
+        $couleur3 = new couleur();
+        $couleur3->setLibelle('Marron');
+        $manager->persist($couleur3);
+
+        $couleur4 = new couleur();
+        $couleur4->setLibelle('Gris');
+        $manager->persist($couleur4);
+
+        $couleur5 = new couleur();
+        $couleur5->setLibelle('Beige');
+        $manager->persist($couleur5);
+
+        $couleur6 = new couleur();
+        $couleur6->setLibelle('Tricolor');
+        $manager->persist($couleur6);
+
+
+        //-------------------------------------------
+        //SEXE
+        //-------------------------------------------
+
         $sexe1 = new Sexe();
         $sexe1->setLibelle('Femelle');
         $manager->persist($sexe1);
@@ -98,6 +135,10 @@ class AppFixtures extends Fixture
         $sexe3 = new Sexe();
         $sexe3->setLibelle('Je ne sais pas');
         $manager->persist($sexe3);
+
+        //-------------------------------------------
+        //STATUT
+        //-------------------------------------------
 
         $statut1 = new statut();
         $statut1->setLibelle('Perdu');
@@ -111,6 +152,10 @@ class AppFixtures extends Fixture
         $statut3->setLibelle('Aperçu');
         $manager->persist($statut3);
 
+        //-------------------------------------------
+        //TAILLE
+        //-------------------------------------------
+
         $taille1 = new taille();
         $taille1->setLibelle('Petit');
         $manager->persist($taille1);
@@ -122,6 +167,10 @@ class AppFixtures extends Fixture
         $taille3 = new taille();
         $taille3->setLibelle('Grand');
         $manager->persist($taille3);
+
+        //-------------------------------------------
+        //TYPE ANIMAL
+        //-------------------------------------------
 
         $typeAnimal1 = new typeAnimal();
         $typeAnimal1->setLibelle('Chien');
@@ -199,20 +248,8 @@ class AppFixtures extends Fixture
         $typeAnimal19->setLibelle('Reptile');
         $manager->persist($typeAnimal19);
 
-        $departement30 = new departement();
-        $departement30->setLibelle('Gard');
-        $manager->persist($departement30);
-
-        $departement35 = new departement();
-        $departement35->setLibelle('Ille et vilaine');
-        $manager->persist($departement35);
-
-
 
         $manager->flush();
-
-
-
 
     }
 }

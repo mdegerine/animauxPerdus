@@ -1,42 +1,114 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Annonce{% endblock %}
 
 {% block body %}
     <h1>Annonce</h1>
-
+    <h2>Images</h2>
+    {% for image in annonce.images %}
+        <div>
+        <img src="{{ asset('uploads/'~ image.name) }}" alt="image" width="150">
+            </div>
+    {% endfor %}
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ annonce.id }}</td>
-            </tr>
+        <tr>
+            <th>Statut</th>
+            <td>{{ annonce.statut.libelle }}</td>
+        </tr>
+        <tr>
+            <th>Type d'animal</th>
+            <td>{{ annonce.typeAnimal.libelle }}</td>
+        </tr>
+
             <tr>
                 <th>Date</th>
                 <td>{{ annonce.date ? annonce.date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Ville</th>
-                <td>{{ annonce.ville }}</td>
+                <th>Departement</th>
+                <td>{{ annonce.departement.libelle }}</td>
             </tr>
             <tr>
-                <th>Rue</th>
-                <td>{{ annonce.rue }}</td>
+                <th>Ville</th>
+                <td>{{ annonce.nomVille }}</td>
+            </tr>
+            <tr>
+                <th>Rue/Quartier</th>
+                <td>{{ annonce.rueQuartier }}</td>
             </tr>
             <tr>
                 <th>Details</th>
                 <td>{{ annonce.details }}</td>
             </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ annonce.photo }}</td>
-            </tr>
+
+        <tr>
+            <th>Prénom</th>
+            <td>{{ annonce.prenom }}</td>
+        </tr>
+
+        <tr>
+            <th>Identification</th>
+            <td>{{ annonce.identification.libelle }}</td>
+        </tr>
+
+        <tr>
+            <th>Poils</th>
+            <td>{{ annonce.poils.libelle }}</td>
+        </tr>
+
+        <tr>
+            <th>sexe</th>
+            <td>{{ annonce.sexe.libelle }}</td>
+        </tr>
+
+        <tr>
+            <th>Taille</th>
+            <td>{{ annonce.taille.libelle }}</td>
+        </tr>
+
+        <tr>
+            <th>Publie par </th>
+            <td>{{ annonce.user.pseudo}}</td>
+        </tr>
+
+        <tr>
+            <td>{{ annonce.commentaires.count == 0 ? "Aucun commentaire" : annonce.commentaires.count ~ "commentaires"}}
+                {% if app.user %}
+            <a href="{{ path('annonce_ajouter_commentaire', {"id" : annonce.id}) }}" class="btn btn-primary">Ajouter un commentaire</a>
+                {% endif %}
+            </td>
+        </tr>
         </tbody>
     </table>
+            <ul>
+                {% for commentaire in annonce.commentaires %}
+                <li class="list-group-item">
+                    <p class="text-primary">
+                    {{ commentaire.dateCreation | date("d/m/y") }}
+                    -Auteur : {{ commentaire.user.nom}} {{ commentaire.user.prenom }}
+                    </p>
+                    {% if app.user and app.user == commentaire.user %}
+                    <p> <a href="{{ path('annonce_modifier_commentaire', {"id" : commentaire.id}) }}"
+                           class="btn btn-primary">Modifier</a>
+                        {% endif%}
+                    </p>
+                    <p>
+                        {{ commentaire.contenu }}
+                    </p>
+                </li>
+                {% endfor %}
+            </ul>
 
-    <a href="{{ path('annonce_index') }}">back to list</a>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            {% if app.user and app.user == annonce.user  %}
+        <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">Modifier</a>
+        {{ include('annonce/_delete_form.html.twig') }}
+            {% endif %}
+        <a class="btn btn-info" href="{{ path('annonce_index') }}">Retour à la liste des annonces</a>
+        </div>
+    </div>
 
-    <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
-
-    {{ include('annonce/_delete_form.html.twig') }}
 {% endblock %}

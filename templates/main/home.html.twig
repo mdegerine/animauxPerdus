@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Accueil - {{ parent() }}
+Accueil
 {% endblock %}
 
 {% block body %}
@@ -10,11 +10,18 @@ Accueil - {{ parent() }}
         <p>Bonjour et bienvenue sur le site d'Animaux Perdus</p>
     </div>
 
-    <div class="descriptif">
-        <p>Le but de cette application est de vous aider à retrouver votre animal disparu.</p>
-    </div>
+    <center>
+    {% if app.user %}
+        <a class="btn btn-success btn-lg" aria-current="page" href="{{ path('annonce_new')}}">Publier une annonce</a>
+        <a class="btn btn-secondary btn-lg" href="{{ path('annonce_index')}}" role="button" style="">Effectuer une recherche</a>
+    {% else %}
+        <a class="btn btn-success btn-lg" aria-current="page" href="{{ path('app_login') }}">Publier une annonce</a>
+        <a class="btn btn-secondary btn-lg" href="{{ path('annonce_index')}}" role="button" style="">Effectuer une recherche</a>
+    {% endif %}
 
-    <a class="btn btn-dark" href="{{ path('annonce_new')}}" role="button" style="">Publier une annonce</a>
+</center>
+
+
 {% endblock %}
 
 

@@ -3,12 +3,14 @@
 
 {% form_theme form "bootstrap_5_horizontal_layout.html.twig" %}
 
-{% block title %}New Annonce{% endblock %}
+{% block title %}Créer annonce{% endblock %}
 
 {% block body %}
-    <h1>Create new Annonce</h1>
+    <h1>Publier une Annonce</h1>
 
     {{ include('annonce/_form.html.twig') }}
+
+    <a class="btn btn-dark btn-lg" href="{{ path('annonce_index') }}">Liste des annonces</a>
 
 {% endblock %}
 

@@ -1,43 +1,67 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme formSearch "bootstrap_5_horizontal_layout.html.twig" %}
+
 {% block title %}Annonce index{% endblock %}
 
 {% block body %}
-    <h1>Annonce index</h1>
+    <h3>Filter les annonces</h3>
+    {{ form_start(formSearch) }}
+    <div class="row">
+        <div class="col-9">
+            {{ form_row(formSearch.statut) }}
+            {{ form_row(formSearch.departement) }}
+            {{ form_row(formSearch.typeAnimal) }}
+        </div>
+    </div>
 
+    <div class="col-2 align-self-center">
+        <button type="submit" class="btn btn-dark btn-lg">Rechercher</button>
+    </div>
+    {{ form_end(formSearch) }}
+<br>
+
+    <h1>Liste des annonces</h1>
+    <p> Total selection : {{ annonces | length }}</p>
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Ville</th>
-                <th>Rue</th>
-                <th>Details</th>
-                <th>Photo</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Photo</th>
+            <th>Statut</th>
+            <th>Date</th>
+            <th>Departement</th>
+            <th>ville</th>
+            <th>Animal</th>
+            <th>pseudo</th>
+            <th>commentaire</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for annonce in annonces %}
             <tr>
-                <td>{{ annonce.id }}</td>
+                <td>{% for image in annonce.images %}
+                        <div>
+                            <img src="{{ asset('uploads/'~ image.name) }}" alt="image" width="120">
+                        </div>
+                    {% endfor %}</td>
+                <td>{{ annonce.statut.libelle }}</td>
                 <td>{{ annonce.date ? annonce.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ annonce.ville }}</td>
-                <td>{{ annonce.rue }}</td>
-                <td>{{ annonce.details }}</td>
-                <td>{{ annonce.photo }}</td>
+                <td>{{ annonce.departement.libelle }}</td>
+                <td>{{ annonce.nomVille }}</td>
+                <td>{{ annonce.typeAnimal.libelle }}</td>
+                <td>{{ annonce.user.pseudo }}</td>
+                <td>{{ annonce.commentaires | length }}</td>
                 <td>
-                    <a href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
-                    <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+                    <a class="btn-sm btn-dark btn-lg" href="{{ path('annonce_show', {'id': annonce.id}) }}">Afficher</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Il n'y a aucune annonce</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('annonce_new') }}">Create new</a>
+    <a class="btn btn-success btn-lg" href="{{ path('annonce_new') }}">Publier une annonce</a>
 {% endblock %}

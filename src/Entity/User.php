@@ -53,11 +53,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length (max=40)
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length (max=40)
      */
     private $prenom;
 
@@ -72,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $photo;
 
     /**
-     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="user", cascade={"remove"})
      */
     private $annonces;
 
@@ -230,15 +234,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Annonce[]
-     */
-    public function getAnnonces(): Collection
+
+    public function getAnnonces()
     {
         return $this->annonces;
     }
 
-    public function addAnnonce(Annonce $annonce): self
+    public function addAnnonce(Annonce $annonce)
     {
         if (!$this->annonces->contains($annonce)) {
             $this->annonces[] = $annonce;

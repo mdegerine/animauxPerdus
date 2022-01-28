@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\VilleRepository;
+use App\Repository\CouleurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=VilleRepository::class)
+ * @ORM\Entity(repositoryClass=CouleurRepository::class)
  */
-class Ville
+class Couleur
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Ville
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="ville")
+     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="couleur")
      */
     private $annonces;
 
@@ -63,7 +63,7 @@ class Ville
     {
         if (!$this->annonces->contains($annonce)) {
             $this->annonces[] = $annonce;
-            $annonce->setVille($this);
+            $annonce->setCouleur($this);
         }
 
         return $this;
@@ -73,11 +73,12 @@ class Ville
     {
         if ($this->annonces->removeElement($annonce)) {
             // set the owning side to null (unless already changed)
-            if ($annonce->getVille() === $this) {
-                $annonce->setVille(null);
+            if ($annonce->getCouleur() === $this) {
+                $annonce->setCouleur(null);
             }
         }
 
         return $this;
     }
+
 }

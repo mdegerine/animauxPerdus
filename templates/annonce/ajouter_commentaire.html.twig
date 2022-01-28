@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formCommentaire "bootstrap_5_horizontal_layout.html.twig" %}
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un commentaire</h1>
+    {{ form_start(formCommentaire) }}
+    {{ form_widget(formCommentaire) }}
+    <button type="submit" class="btn btn-primary btn-sm">Créer</button>
+    <a class="btn btn-info" href="{{ path('annonce_index') }}">Retour à la liste des annonces</a>
+    {{ form_end(formCommentaire) }}
+{% endblock %}
+
+

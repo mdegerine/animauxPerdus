@@ -25,14 +25,15 @@ class Taille
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity=Animal::class, mappedBy="taille")
+     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="taille")
      */
-    private $animals;
+    private $annonces;
 
     public function __construct()
     {
-        $this->animals = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -52,29 +53,29 @@ class Taille
     }
 
     /**
-     * @return Collection|Animal[]
+     * @return Collection|Annonce[]
      */
-    public function getAnimals(): Collection
+    public function getAnnonces(): Collection
     {
-        return $this->animals;
+        return $this->annonces;
     }
 
-    public function addAnimal(Animal $animal): self
+    public function addAnnonce(Annonce $annonce): self
     {
-        if (!$this->animals->contains($animal)) {
-            $this->animals[] = $animal;
-            $animal->setTaille($this);
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces[] = $annonce;
+            $annonce->setTaille($this);
         }
 
         return $this;
     }
 
-    public function removeAnimal(Animal $animal): self
+    public function removeAnnonce(Annonce $annonce): self
     {
-        if ($this->animals->removeElement($animal)) {
+        if ($this->annonces->removeElement($annonce)) {
             // set the owning side to null (unless already changed)
-            if ($animal->getTaille() === $this) {
-                $animal->setTaille(null);
+            if ($annonce->getTaille() === $this) {
+                $annonce->setTaille(null);
             }
         }
 

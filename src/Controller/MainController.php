@@ -17,10 +17,11 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/actualites", name="main_actualites")
+     * @Route ("/guideA", name="main_guideA")
      */
-    public function actualites(): Response
+    public function guideA(): Response
     {
-        return $this->render('main/actualites.html.twig');
+        return $this->render('main/guideA.html.twig');
     }
+
 }

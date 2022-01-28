@@ -28,6 +28,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $this->urlGenerator = $urlGenerator;
     }
 
+    // REQUETE DE CONNEXION UTILISATEUR
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -44,6 +45,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
+    // DES QUE NOUS SOMMES AUTHENTIFIER NOU SOMMES REDIRIGE VERS MAIN HOME
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {

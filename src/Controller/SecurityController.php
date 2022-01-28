@@ -27,6 +27,7 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * route de deconnexion
      * @Route("/logout", name="app_logout")
      */
     public function logout(): void
